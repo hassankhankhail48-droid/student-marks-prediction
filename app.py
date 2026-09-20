@@ -1,5 +1,6 @@
 import streamlit as st
 import joblib
+import pandas as pd
 
 st.set_page_config(
     page_title="Student Marks Predictor",
@@ -43,11 +44,15 @@ with col3:
 st.divider()
 
 if st.button("🔮 Predict Marks"):
-    new_student = [[study_hours, attendance, previous_marks]]
+    new_student = pd.DataFrame({
+        "Study_Hours": [study_hours],
+        "Attendance": [attendance],
+        "Previous_Marks": [previous_marks]
+    })
+
     prediction = model.predict(new_student)
 
     final_marks = prediction[0]
-
     st.success(f"🎯 Predicted Final Marks: {final_marks:.2f}")
 
     if final_marks >= 80:
