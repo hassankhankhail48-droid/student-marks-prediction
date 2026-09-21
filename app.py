@@ -52,7 +52,7 @@ if st.button("🔮 Predict Marks"):
 
     prediction = model.predict(new_student)
 
-    final_marks = prediction[0]
+    final_marks = max(0, min(100, prediction[0]))
     st.success(f"🎯 Predicted Final Marks: {final_marks:.2f}")
 
     if final_marks >= 80:
